@@ -1,0 +1,13 @@
+(1) build image
+docker build -t sharongol/python3 .
+
+(2) rebuild image
+docker build --no-cache -t sharongol/python3 .
+
+(3) run container headless (no matplotlib figure will be displayed)
+docker run -it sharongol/python3
+
+(4) run against xhost to have a matplotlib figure on the host  
+xhost+
+docker run -it --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" sharongol/python3 && export containerId=$(docker ps -l -q)
+
