@@ -7,7 +7,25 @@ docker build --no-cache -t sharongol/python3 .
 (3) run container headless (no matplotlib figure will be displayed)
 docker run -it sharongol/python3
 
-(4) run against xhost to have a matplotlib figure on the host  
+(4) In linux : run against xhost to have a matplotlib figure on the host  
 xhost+
 docker run -it --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" sharongol/python3 && export containerId=$(docker ps -l -q)
+
+(5) On Windows
+- Install XMing 
+- obtain ip-address of DISPLAY from below interface, after ipconfig on Windows host 
+
+   Ethernet adapter VirtualBox Host-Only Network:
+
+      Connection-specific DNS Suffix  . :
+      Link-local IPv6 Address . . . . . : fe80::520:af25:b175:3b3c%21
+      IPv4 Address. . . . . . . . . . . : 192.168.56.1
+      Subnet Mask . . . . . . . . . . . : 255.255.255.0
+      Default Gateway . . . . . . . . . :
+	  
+	  add a line to C:\Program Files (x86)\Xming\x0.hosts containg the above address, i.e.:
+	  192.168.56.1
+- run XLaunch (verify after run that you see the Xming icon in the right-corner of windows lower task-bar
+- issue:
+  docker run -it --env DISPLAY=192.168.56.1:0.0 --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" sharongol/python3 && export containerId=$(docker ps -l -q)
 
