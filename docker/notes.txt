@@ -1,5 +1,5 @@
 
-(1) build image
+(1) build image 
 docker build -t sharongol/python3 .
 
 (2) rebuild image
